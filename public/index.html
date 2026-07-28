@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ledger — Live</title>
-<script src="/socket.io/socket.io.js"></script>
+<script src="https://ledger-server-7ix0.onrender.com/socket.io/socket.io.js" defer></script>
 <style>
 
 :root{
@@ -257,8 +257,10 @@ let TOKEN = localStorage.getItem('ledger_live_token') || null;
 let ME = null, MY_AGENT = null;
 let socket = null;
 
+const API_BASE = 'https://ledger-server-7ix0.onrender.com';
+
 async function api(path, opts={}){
-  const res = await fetch('/api' + path, {
+  const res = await fetch(API_BASE + '/api' + path, {
     ...opts,
     headers: { 'Content-Type':'application/json', ...(TOKEN?{Authorization:'Bearer '+TOKEN}:{}), ...(opts.headers||{}) }
   });
@@ -281,7 +283,7 @@ async function refetchCore(){
 }
 
 function connectSocket(){
-  socket = io();
+  socket = io(API_BASE);
   socket.on('connect', ()=>{ socket.emit('hello', {username: ME.username}); markConn(true); });
   socket.on('disconnect', ()=>markConn(false));
   socket.on('sync', async (evt)=>{
