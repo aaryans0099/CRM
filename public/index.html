@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Ledger — Live</title>
-<script src="https://ledger-server-7ix0.onrender.com/socket.io/socket.io.js" defer></script>
+<script src="https://crm-2bof.onrender.com/socket.io/socket.io.js" defer></script>
 <style>
 
 :root{
@@ -257,7 +257,7 @@ let TOKEN = localStorage.getItem('ledger_live_token') || null;
 let ME = null, MY_AGENT = null;
 let socket = null;
 
-const API_BASE = 'https://ledger-server-7ix0.onrender.com';
+const API_BASE = 'https://crm-2bof.onrender.com';
 
 async function api(path, opts={}){
   const res = await fetch(API_BASE + '/api' + path, {
